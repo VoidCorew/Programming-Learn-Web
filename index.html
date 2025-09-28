@@ -1,124 +1,136 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeMaster - Изучай программирование легко</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn — Бесплатное обучение программированию</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">CodeMaster</div>
-            <nav>
-                <ul>
-                    <li><a href="#features">Возможности</a></li>
-                    <li><a href="#courses">Курсы</a></li>
-                    <li><a href="#reviews">Отзывы</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-            </nav>
-            <button class="btn">Войти</button>
-        </div>
-    </header>
+  <header>
+    <div class="container">
+      <h1 class="logo">DevLearn</h1>
+      <nav>
+        <ul>
+          <li><a href="#languages">Языки</a></li>
+          <li><a href="#playground">Playground</a></li>
+          <li><a href="#about">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Начни программировать уже сегодня!</h1>
-            <p>Интерактивные курсы по HTML, CSS, JavaScript и другим языкам.</p>
-            <button class="btn btn-primary">Начать обучение</button>
-        </div>
-    </section>
+  <section class="hero">
+    <div class="container">
+      <h2>Бесплатно. Без регистрации. Для всех.</h2>
+      <p>Изучайте программирование с нуля с интерактивными уроками и практикой.</p>
+      <a href="#languages" class="btn">Начать обучение</a>
+    </div>
+  </section>
 
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Почему выбирают нас?</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Практика</h3>
-                    <p>Много практических заданий и проектов.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h3>Эксперты</h3>
-                    <p>Обучайтесь у лучших преподавателей.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-certificate"></i>
-                    <h3>Сертификат</h3>
-                    <p>Получите сертификат после окончания курса.</p>
-                </div>
-            </div>
+  <section id="languages" class="languages">
+    <div class="container">
+      <h2>Доступные языки</h2>
+      <div class="lang-grid">
+        <!-- HTML -->
+        <div class="lang-card">
+          <div class="lang-icon"><i class="fab fa-html5"></i></div>
+          <h3>HTML</h3>
+          <p>Основы веб-разработки. Структура сайтов.</p>
+          <a href="/lessons/python/index.html" class="btn btn-outline">Уроки</a>
         </div>
-    </section>
 
-    <section id="courses" class="courses">
-        <div class="container">
-            <h2>Наши курсы</h2>
-            <div class="course-grid">
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200" alt="HTML/CSS">
-                    <h3>HTML & CSS</h3>
-                    <p>Основы веб-разработки.</p>
-                    <button class="btn btn-outline">Подробнее</button>
-                </div>
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200" alt="JavaScript">
-                    <h3>JavaScript</h3>
-                    <p>Интерактивные веб-приложения.</p>
-                    <button class="btn btn-outline">Подробнее</button>
-                </div>
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200" alt="Python">
-                    <h3>Python</h3>
-                    <p>Универсальный язык программирования.</p>
-                    <button class="btn btn-outline">Подробнее</button>
-                </div>
-            </div>
+        <!-- CSS -->
+        <div class="lang-card">
+          <div class="lang-icon"><i class="fab fa-css3-alt"></i></div>
+          <h3>CSS</h3>
+          <p>Стилизация и дизайн веб-страниц.</p>
+          <a href="#" class="btn btn-outline">Уроки</a>
         </div>
-    </section>
 
-    <section id="reviews" class="reviews">
-        <div class="container">
-            <h2>Отзывы студентов</h2>
-            <div class="review-slider">
-                <div class="review">
-                    <p>"Отличные курсы! Научился верстать за месяц."</p>
-                    <span>- Алексей</span>
-                </div>
-                <div class="review">
-                    <p>"JavaScript объясняют очень понятно. Рекомендую!"</p>
-                    <span>- Мария</span>
-                </div>
-            </div>
+        <!-- JavaScript -->
+        <div class="lang-card">
+          <div class="lang-icon"><i class="fab fa-js"></i></div>
+          <h3>JavaScript</h3>
+          <p>Интерактивность и логика на сайте.</p>
+          <a href="#" class="btn btn-outline">Уроки</a>
         </div>
-    </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Свяжитесь с нами</h2>
-            <form id="contact-form">
-                <input type="text" placeholder="Ваше имя" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Ваше сообщение" required></textarea>
-                <button type="submit" class="btn btn-primary">Отправить</button>
-            </form>
+        <!-- Python -->
+        <div class="lang-card">
+          <div class="lang-icon"><i class="fab fa-python"></i></div>
+          <h3>Python</h3>
+          <p>Универсальный язык для начинающих.</p>
+          <a href="#" class="btn btn-outline">Уроки</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 CodeMaster. Все права защищены.</p>
-            <div class="social">
-                <a href="#"><i class="fab fa-vk"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
+  <!-- Playground -->
+  <section id="playground" class="playground">
+    <div class="container">
+      <h2>Практикуйтесь прямо в браузере</h2>
+      <div class="code-editor">
+        <div class="editor-header">
+          <span class="lang-tab active">HTML</span>
+          <span class="lang-tab">CSS</span>
+          <span class="lang-tab">JS</span>
+          <button id="run-code" class="btn">Запустить ▶</button>
         </div>
-    </footer>
+        <div class="editor-content">
+          <textarea id="html-code" class="code-area" placeholder="<div>Ваш HTML-код здесь</div>"></textarea>
+          <textarea id="css-code" class="code-area" placeholder="body { background: #f0f0f0; }"></textarea>
+          <textarea id="js-code" class="code-area" placeholder="console.log('Hello!');"></textarea>
+        </div>
+        <div class="editor-preview">
+          <iframe id="preview-frame"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- Пример урока -->
+  <section class="lesson-example">
+    <div class="container">
+      <h2>Как выглядят уроки</h2>
+      <div class="lesson-card">
+        <h3>HTML: Основы тегов</h3>
+        <div class="lesson-content">
+          <p>Каждый HTML-документ начинается с <code>&lt;!DOCTYPE html&gt;</code>.</p>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Мой сайт&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Привет, мир!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          <div class="task">
+            <h4>Задание:</h4>
+            <p>Создайте страницу с заголовком "Моя первая страница".</p>
+            <button class="btn btn-small">Проверить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="about">
+    <div class="container">
+      <p>DevLearn — бесплатный проект для обучения программированию. Никаких платных курсов и регистрации.</p>
+      <div class="social">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

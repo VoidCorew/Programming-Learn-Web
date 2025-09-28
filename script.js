@@ -1,40 +1,37 @@
-// Плавная прокрутка для навигации
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        targetElement.scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+// Playground: Переключение вкладок
+const tabs = document.querySelectorAll('.lang-tab');
+const codeAreas = document.querySelectorAll('.code-area');
+
+tabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => {
+    // Удаляем активный класс у всех
+    tabs.forEach(t => t.classList.remove('active'));
+    codeAreas.forEach(a => a.classList.remove('active'));
+    
+    // Добавляем активный класс выбранному
+    tab.classList.add('active');
+    codeAreas[index].class.classList.add('active');
+  });
 });
 
-// Отправка формы
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
-        this.reset();
-    });
-}
+// Запуск кода
+document.getElementById('run-code').addEventListener('click', () => {
+  const html = document.getElementById('html-code').value;
+  const css = `<style>${document.getElementById('css-code').value}</style>`;
+  const js = `<script>${document.getElementById('js-code').value}<\/script>`;
+  
+  const preview = document.getElementById('preview-frame');
+  const previewDoc = preview.contentDocument || preview.contentWindow.document;
+  
+  previewDoc.open();
+  previewDoc.write(html + css + js);
+  previewDoc.close();
+});
 
-// Слайдер отзывов (простой вариант)
-let currentReview = 0;
-const reviews = document.querySelectorAll('.review');
+// По умолчанию активируем HTML
+tabs[0].click();
 
-function showReview(index) {
-    reviews.forEach((review, i) => {
-        review.style.display = i === index ? 'block' : 'none';
-    });
-}
-
-// Автоматическая смена отзывов
-setInterval(() => {
-    currentReview = (currentReview + 1) % reviews.length;
-    showReview(currentReview);
-}, 5000);
-
-// Показать первый отзыв
-showReview(0);
+// Проверка задания (пример)
+document.querySelector('.task button').addEventListener('click', () => {
+  alert('Задание проверено! (Это демо)');
+});

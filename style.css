@@ -1,10 +1,10 @@
-/* Общие стили */
+/* Основные стили */
 :root {
-    --primary: #4e54c8;
-    --secondary: #8f94fb;
-    --dark: #1e1e2c;
-    --light: #f5f5f7;
-    --gray: #d1d1d1;
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --dark: #1a1a2e;
+    --light: #f8f9fa;
+    --gray: #6c757d;
 }
 
 * {
@@ -28,48 +28,51 @@ body {
 }
 
 .btn {
+    display: inline-block;
     padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
     background-color: var(--primary);
     color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-.btn-primary:hover {
-    background-color: #3a3fa0;
+.btn:hover {
+    background-color: var(--secondary);
 }
 
 .btn-outline {
-    background-color: transparent;
+    background: transparent;
     border: 2px solid var(--primary);
     color: var(--primary);
 }
 
 .btn-outline:hover {
-    background-color: var(--primary);
+    background: var(--primary);
     color: white;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 14px;
 }
 
 /* Шапка */
 header {
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px 0;
 }
 
 .logo {
@@ -80,226 +83,230 @@ header .container {
 
 nav ul {
     display: flex;
+    gap: 10px;
     list-style: none;
 }
 
-nav ul li {
-    margin-left: 20px;
-}
-
 nav ul li a {
+    padding: 10px 15px;
     text-decoration: none;
     color: var(--dark);
     font-weight: 500;
+    transition: all 0.3s;
+    border-radius: 5px;
 }
 
 nav ul li a:hover {
-    color: var(--primary);
+    color: var(--light);
+    background-color: var(--primary);
 }
 
-/* Герой-секция */
+/* Герой */
 .hero {
-    padding: 150px 0 100px;
+    padding: 100px 0;
     text-align: center;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
 }
 
-.hero h1 {
-    font-size: 48px;
+.hero h2 {
+    font-size: 2.5rem;
     margin-bottom: 20px;
 }
 
 .hero p {
-    font-size: 20px;
+    font-size: 1.2rem;
     margin-bottom: 30px;
 }
 
-/* Возможности */
-.features {
+/* Языки */
+.languages {
     padding: 80px 0;
+}
+
+.languages h2 {
     text-align: center;
-}
-
-.features h2 {
     margin-bottom: 50px;
-    font-size: 36px;
+    font-size: 2rem;
 }
 
-.features-grid {
+.lang-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
 
-.feature {
+.lang-card {
+    background: white;
     padding: 30px;
-    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.feature i {
-    font-size: 50px;
-    color: var(--primary);
-    margin-bottom: 20px;
-}
-
-.feature h3 {
-    margin-bottom: 15px;
-}
-
-/* Курсы */
-.courses {
-    padding: 80px 0;
-    background-color: #f9f9f9;
-}
-
-.courses h2 {
     text-align: center;
-    margin-bottom: 50px;
-    font-size: 36px;
-}
-
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.course-card {
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s;
 }
 
-.course-card:hover {
+.lang-card:hover {
     transform: translateY(-10px);
 }
 
-.course-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.course-card h3 {
-    padding: 20px 20px 10px;
-}
-
-.course-card p {
-    padding: 0 20px 20px;
-    color: #666;
-}
-
-.course-card button {
-    margin: 0 20px 20px;
-}
-
-/* Отзывы */
-.reviews {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.reviews h2 {
-    margin-bottom: 50px;
-    font-size: 36px;
-}
-
-.review {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    margin: 0 auto;
-    max-width: 600px;
-}
-
-.review p {
-    font-style: italic;
-    margin-bottom: 15px;
-}
-
-.review span {
-    font-weight: 600;
+.lang-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
     color: var(--primary);
 }
 
-/* Контакты */
-.contact {
+.lang-card h3 {
+    margin-bottom: 15px;
+}
+
+.lang-card p {
+    color: var(--gray);
+    margin-bottom: 20px;
+}
+
+/* Playground */
+.playground {
     padding: 80px 0;
-    background-color: #f9f9f9;
+    background-color: #f1f4f8;
 }
 
-.contact h2 {
+.playground h2 {
     text-align: center;
-    margin-bottom: 50px;
-    font-size: 36px;
+    margin-bottom: 30px;
 }
 
-#contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: grid;
-    gap: 20px;
+.code-editor {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-#contact-form input,
-#contact-form textarea {
-    padding: 15px;
-    border: 1px solid var(--gray);
+.editor-header {
+    display: flex;
+    background: var(--dark);
+    padding: 10px;
+}
+
+.lang-tab {
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+    margin-right: 5px;
 }
 
-#contact-form textarea {
-    height: 150px;
-    resize: vertical;
+.lang-tab.active {
+    background: var(--primary);
+}
+
+#run-code {
+    margin-left: auto;
+    padding: 5px 15px;
+    background: #28a745;
+}
+
+.editor-content {
+    display: flex;
+    height: 300px;
+}
+
+.code-area {
+    flex: 1;
+    border: none;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    resize: none;
+    outline: none;
+    display: none;
+}
+
+.code-area.active {
+    display: block;
+}
+
+.editor-preview {
+    height: 300px;
+    border-top: 1px solid #ddd;
+}
+
+#preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+/* Уроки */
+.lesson-example {
+    padding: 80px 0;
+}
+
+.lesson-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.lesson-card h3 {
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+pre {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 15px 0;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+}
+
+.task {
+    background: #f1f4f8;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
 /* Подвал */
 footer {
-    background-color: var(--dark);
+    background: var(--dark);
     color: white;
-    padding: 30px 0;
+    padding: 50px 0;
     text-align: center;
 }
 
-footer .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.social {
+    margin-top: 20px;
 }
 
 .social a {
     color: white;
-    margin-left: 15px;
-    font-size: 20px;
-}
-
-.social a:hover {
-    color: var(--secondary);
+    font-size: 24px;
+    margin: 0 10px;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .features-grid,
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
-
     header .container {
         flex-direction: column;
     }
 
     nav ul {
-        margin: 20px 0;
+        margin-top: 20px;
     }
 
-    .hero h1 {
-        font-size: 36px;
+    .editor-content {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .code-area {
+        height: 200px;
     }
 }

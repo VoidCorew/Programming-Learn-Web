@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevLearn — Изучение Python с нуля</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary: #306998;
+            --secondary: #FFD43B;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --python-blue: #306998;
+            --python-yellow: #FFD43B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #25527a;
+        }
+
+        /* Шапка */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Основная структура с сайдбаром */
+        .main-layout {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--python-yellow);
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #f1f4f8;
+            color: var(--primary);
+        }
+
+        .sidebar ul li a.active {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 700;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding-left: 30px;
+        }
+
+        .content-page {
+            display: none;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-page.active {
+            display: block;
+        }
+
+        .content-page h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .content-page p, .content-page ul {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .content-page ul {
+            padding-left: 20px;
+        }
+
+        pre {
+            background: #2b2b2b;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            tab-size: 4;
+            font-size: 1rem;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+        }
+
+        /* Code Editor */
+        .code-editor-container {
+            margin-top: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--dark);
+            padding: 10px 15px;
+            color: white;
+        }
+
+        .editor-header h4 {
+            font-weight: 500;
+        }
+
+        .run-code-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .run-code-btn:hover {
+            background-color: #218838;
+        }
+
+        .code-editor-area {
+            width: 100%;
+            height: 200px;
+            border: none;
+            padding: 15px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            resize: vertical;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .output-area {
+            background: #f1f4f8;
+            padding: 15px;
+            min-height: 50px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            color: #333;
+            border-top: 1px solid #ddd;
+        }
+
+        .output-area p {
+            margin: 0;
+            padding: 2px 0;
+            white-space: pre-wrap;
+        }
+
+        .output-area .error {
+            color: #d9534f;
+        }
+
+        .output-area .success {
+            color: #5cb85c;
+        }
+
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .main-content {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <h1 class="logo">DevLearn Python</h1>
+    </div>
+</header>
+
+<div class="container main-layout">
+    <aside class="sidebar">
+        <h3>Темы</h3>
+        <ul id="topics-list">
+            <li><a href="#intro" class="active">Введение в Python</a></li>
+            <li><a href="#syntax">Основы синтаксиса</a></li>
+            <li><a href="#variables">Переменные и типы данных</a></li>
+            <li><a href="#operators">Операторы</a></li>
+            <li><a href="#control-flow">Условные конструкции</a></li>
+            <li><a href="#loops">Циклы</a></li>
+            <li><a href="#lists">Структуры данных: Списки</a></li>
+            <li><a href="#dictionaries">Структуры данных: Словари</a></li>
+            <li><a href="#functions">Функции</a></li>
+            <li><a href="#oop">Классы и ООП</a></li>
+            <li><a href="#files">Работа с файлами</a></li>
+            <li><a href="#modules">Модули и пакеты</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <!-- Введение в Python -->
+        <div id="intro" class="content-page active">
+            <h2>Введение в Python</h2>
+            <p>Python — это высокоуровневый, интерпретируемый язык программирования общего назначения, созданный Гвидо
+                ван Россумом и впервые выпущенный в 1991 году. Философия языка подчеркивает читаемость кода и простоту
+                синтаксиса, что позволяет программистам выражать концепции в меньшем количестве строк кода, чем это
+                возможно в таких языках, как C++ или Java.</p>
+            <p>Ключевые особенности Python:</p>
+            <ul>
+                <li><strong>Простой и читаемый синтаксис:</strong> Код на Python похож на обычный английский язык, что
+                    делает его идеальным для начинающих.
+                </li>
+                <li><strong>Интерпретируемый:</strong> Код выполняется построчно, что упрощает отладку.</li>
+                <li><strong>Кроссплатформенный:</strong> Программы на Python могут работать на Windows, macOS, Linux и
+                    других операционных системах без изменений.
+                </li>
+                <li><strong>Большая стандартная библиотека:</strong> Python поставляется с обширной библиотекой модулей
+                    для решения различных задач.
+                </li>
+                <li><strong>Динамическая типизация:</strong> Вам не нужно объявлять тип переменной.</li>
+            </ul>
+            <p>Самая простая программа на Python — это вывод строки "Hello, World!".</p>
+            <pre><code>print("Hello, World!")</code></pre>
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <h4>Интерактивный редактор</h4>
+                    <button class="run-code-btn" data-target="intro-output">Запустить ▶</button>
+                </div>
+                <textarea class="code-editor-area" id="intro-code">print("Hello, Python learners!")</textarea>
+                <div class="output-area" id="intro-output"></div>
+            </div>
+        </div>
+
+        <!-- Основы синтаксиса -->
+        <div id="syntax" class="content-page">
+            <h2>Основы синтаксиса</h2>
+            <p>Синтаксис Python отличается своей лаконичностью. Важнейшей особенностью являются <strong>отступы</strong>,
+                которые используются для определения блоков кода вместо фигурных скобок, как во многих других языках.
+            </p>
+            <p>Основные моменты:</p>
+            <ul>
+                <li><strong>Отступы:</strong> Используйте 4 пробела для каждого уровня отступа. Это не просто стиль, это
+                    требование синтаксиса.
+                </li>
+                <li><strong>Комментарии:</strong> Однострочные комментарии начинаются с символа <code>#</code>.</li>
+                <li><strong>Переменные:</strong> Создаются в момент присвоения им значения. Имена переменных
+                    чувствительны к регистру (<code>age</code> и <code>Age</code> — разные переменные).
+                </li>
+            </ul>
+            <pre><code># Это комментарий
+# Объявление переменной
+site_name = "DevLearn"
+
+# Блок кода с отступом
+if True:
+    print("Это сообщение будет выведено")
+    # Этот print находится в том же блоке
+
+print("А это сообщение уже вне блока if")</code></pre>
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <h4>Интерактивный редактор</h4>
+                    <button class="run-code-btn" data-target="syntax-output">Запустить ▶</button>
+                </div>
+                <textarea class="code-editor-area" id="syntax-code"># Попробуйте изменить значение переменной
+x = 10
+if x > 5:
+    print(f"Значение {x} больше 5")
+    print("Это внутри блока if")
+print("Это снаружи блока if")
+</textarea>
+                <div class="output-area" id="syntax-output"></div>
+            </div>
+        </div>
+
+        <!-- Переменные и типы данных -->
+        <div id="variables" class="content-page">
+            <h2>Переменные и типы данных</h2>
+            <p>Переменные — это контейнеры для хранения данных. В Python есть несколько встроенных типов данных:</p>
+            <ul>
+                <li><strong>Текстовый тип:</strong> <code>str</code> (строка)</li>
+                <li><strong>Числовые типы:</strong> <code>int</code> (целое число), <code>float</code> (число с
+                    плавающей точкой)
+                </li>
+                <li><strong>Логический тип:</strong> <code>bool</code> (True или False)</li>
+                <li><strong>Последовательности:</strong> <code>list</code>, <code>tuple</code>, <code>range</code></li>
+                <li><strong>Словарь:</strong> <code>dict</code></li>
+                <li><strong>Множества:</strong> <code>set</code></li>
+            </ul>
+            <p>Вы можете узнать тип любой переменной с помощью функции <code>type()</code>.</p>
+            <pre><code>name = "Алиса"      # str
+age = 30           # int
+height = 1.68      # float
+is_active = True   # bool
+
+print(type(name))
+print(type(age))
+print(type(height))
+print(type(is_active))
+</code></pre>
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <h4>Интерактивный редактор</h4>
+                    <button class="run-code-btn" data-target="variables-output">Запустить ▶</button>
+                </div>
+                <textarea class="code-editor-area" id="variables-code"># Объявите несколько переменных разных типов и выведите их
+product = "Ноутбук"
+price = 75000
+in_stock = True
+
+print(f"Товар: {product}")
+print(f"Цена: {price} руб.")
+print(f"В наличии: {in_stock}")
+print(f"Тип цены: {type(price)}")
+</textarea>
+                <div class="output-area" id="variables-output"></div>
+            </div>
+        </div>
+
+        <!-- Другие страницы добавляются по аналогии... -->
+        <!-- Я добавлю еще несколько для полноты примера -->
+
+        <div id="functions" class="content-page">
+            <h2>Функции</h2>
+            <p>Функции — это многократно используемые блоки кода, которые выполняют определенную задачу. Они помогают
+                сделать код более организованным, модульным и читаемым.</p>
+            <p>Функция определяется с помощью ключевого слова <code>def</code>, за которым следует имя функции и круглые
+                скобки <code>()</code>. В скобках могут быть указаны параметры.</p>
+            <pre><code># Простая функция без параметров
+def greet():
+    print("Привет, добро пожаловать!")
+
+# Функция с параметрами
+def add_numbers(a, b):
+    result = a + b
+    return result # Ключевое слово return возвращает значение
+
+# Вызов функций
+greet()
+sum_result = add_numbers(5, 7)
+print(f"Сумма: {sum_result}")
+</code></pre>
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <h4>Интерактивный редактор</h4>
+                    <button class="run-code-btn" data-target="functions-output">Запустить ▶</button>
+                </div>
+                <textarea class="code-editor-area" id="functions-code"># Напишите функцию для расчета площади прямоугольника
+def calculate_area(width, height):
+    return width * height
+
+# Вызовите функцию с разными значениями
+area1 = calculate_area(10, 5)
+area2 = calculate_area(7, 3)
+
+print(f"Площадь первого прямоугольника: {area1}")
+print(f"Площадь второго прямоугольника: {area2}")
+</textarea>
+                <div class="output-area" id="functions-output"></div>
+            </div>
+        </div>
+
+        <div id="lists" class="content-page">
+            <h2>Структуры данных: Списки</h2>
+            <p>Список (<code>list</code>) — это упорядоченная и изменяемая коллекция элементов. Списки могут содержать
+                элементы разных типов. Они создаются с помощью квадратных скобок <code>[]</code>.</p>
+            <p>Основные операции со списками:</p>
+            <ul>
+                <li><strong>Доступ к элементам:</strong> по индексу (нумерация с 0). <code>my_list[0]</code></li>
+                <li><strong>Добавление элемента:</strong> <code>my_list.append(item)</code></li>
+                <li><strong>Удаление элемента:</strong> <code>my_list.remove(item)</code> или <code>del
+                    my_list[index]</code></li>
+                <li><strong>Длина списка:</strong> <code>len(my_list)</code></li>
+            </ul>
+            <pre><code># Создание списка
+fruits = ["яблоко", "банан", "вишня"]
+print(f"Исходный список: {fruits}")
+
+# Добавление элемента
+fruits.append("апельсин")
+print(f"После добавления: {fruits}")
+
+# Доступ по индексу
+first_fruit = fruits[0]
+print(f"Первый фрукт: {first_fruit}")
+
+# Удаление элемента
+fruits.remove("банан")
+print(f"После удаления: {fruits}")
+
+# Длина списка
+print(f"Длина списка: {len(fruits)}")
+</code></pre>
+            <div class="code-editor-container">
+                <div class="editor-header">
+                    <h4>Интерактивный редактор</h4>
+                    <button class="run-code-btn" data-target="lists-output">Запустить ▶</button>
+                </div>
+                <textarea class="code-editor-area" id="lists-code"># Создайте список чисел
+numbers = [10, 20, 30, 40, 50]
+
+# Добавьте число 60 в конец
+numbers.append(60)
+
+# Измените второй элемент (с индексом 1) на 25
+numbers[1] = 25
+
+# Выведите итоговый список и его длину
+print(f"Итоговый список: {numbers}")
+print(f"Длина: {len(numbers)}")
+</textarea>
+                <div class="output-area" id="lists-output"></div>
+            </div>
+        </div>
+
+        <!-- Остальные страницы (заглушки) -->
+        <div id="operators" class="content-page"><h2>Операторы</h2>
+            <p>Содержимое скоро появится...</p></div>
+        <div id="control-flow" class="content-page"><h2>Условные конструкции</h2>
+            <p>Содержимое скоро появится...</p></div>
+        <div id="loops" class="content-page"><h2>Циклы</h2>
+            <p>Содержимое скоро появится...</p></div>
+        <div id="dictionaries" class="content-page"><h2>Структуры данных: Словари</h2>
+            <p>Содержимое скоро появится...</p></div>
+        <div id="oop" class="content-page"><h2>Классы и ООП</h2>
+            <p>Содержимое скоро появится...</p></div>
+        <div id="files" class="content-page"><h2>Работа с файлами</h2>
+            <p>Содержимое скоро появится...</p></div>
+        <div id="modules" class="content-page"><h2>Модули и пакеты</h2>
+            <p>Содержимое скоро появится...</p></div>
+
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const topicLinks = document.querySelectorAll('#topics-list a');
+        const contentPages = document.querySelectorAll('.main-content .content-page');
+        const runButtons = document.querySelectorAll('.run-code-btn');
+
+        // Функция для переключения страниц
+        function switchPage(hash) {
+            // Убираем active со всех ссылок и страниц
+            topicLinks.forEach(link => link.classList.remove('active'));
+            contentPages.forEach(page => page.classList.remove('active'));
+
+            // Находим нужную ссылку и страницу
+            const activeLink = document.querySelector(`#topics-list a[href="${hash}"]`);
+            const activePage = document.querySelector(hash);
+
+            // Добавляем класс active
+            if (activeLink) activeLink.classList.add('active');
+            if (activePage) activePage.classList.add('active');
+        }
+
+        // Обработчик кликов по ссылкам в сайдбаре
+        document.getElementById('topics-list').addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const hash = e.target.getAttribute('href');
+                // Меняем URL для возможности поделиться ссылкой
+                window.location.hash = hash;
+            }
+        });
+
+        // Отслеживаем изменение hash в URL
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash || '#intro';
+            switchPage(hash);
+        });
+
+        // Инициализация при загрузке страницы
+        const initialHash = window.location.hash || '#intro';
+        switchPage(initialHash);
+
+        // Обработчик для кнопок "Запустить"
+        runButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const outputId = button.dataset.target;
+                const codeId = outputId.replace('-output', '-code');
+
+                const code = document.getElementById(codeId).value;
+                const outputDiv = document.getElementById(outputId);
+
+                // Очищаем предыдущий вывод
+                outputDiv.innerHTML = '';
+
+                // Это очень упрощенная эмуляция. Для реального выполнения Python
+                // на клиенте нужен WebAssembly, Brython, Skulpt или сервер.
+                // Здесь мы перехватываем console.log для вывода.
+                const oldLog = console.log;
+                let outputBuffer = [];
+                console.log = function (...args) {
+                    const message = args.map(arg => {
+                        if (typeof arg === 'object' && arg !== null) {
+                            return JSON.stringify(arg, null, 2);
+                        }
+                        return String(arg);
+                    }).join(' ');
+                    outputBuffer.push(message);
+                };
+
+                try {
+                    // Используем Function для выполнения кода в безопасной области
+                    new Function(code)();
+
+                    // Выводим результат
+                    outputBuffer.forEach(line => {
+                        const p = document.createElement('p');
+                        p.textContent = line;
+                        outputDiv.appendChild(p);
+                    });
+
+                    const successMsg = document.createElement('p');
+                    successMsg.className = 'success';
+                    successMsg.textContent = 'Код выполнен успешно!';
+                    outputDiv.appendChild(successMsg);
+
+                } catch (error) {
+                    const errorMsg = document.createElement('p');
+                    errorMsg.className = 'error';
+                    errorMsg.textContent = `Ошибка: ${error.message}`;
+                    outputDiv.appendChild(errorMsg);
+                } finally {
+                    // Возвращаем оригинальный console.log
+                    console.log = oldLog;
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+</html>
